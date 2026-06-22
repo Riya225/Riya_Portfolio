@@ -18,7 +18,12 @@
           <p class="brand-role">Frontend Developer</p>
         </div>
       </div>
-      <nav class="topnav">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="topnav" id="main-navigation">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
@@ -278,6 +283,27 @@
       Riya
     </footer>
   </div>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const topbar = document.querySelector('.topbar');
+    const navLinks = document.querySelectorAll('.topnav a');
+
+    if (navToggle && topbar) {
+      const toggleNav = () => {
+        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isOpen));
+        topbar.classList.toggle('nav-open', !isOpen);
+      };
+
+      navToggle.addEventListener('click', toggleNav);
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          topbar.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>
